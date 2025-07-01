@@ -60,7 +60,9 @@ jobs:
         with:
           images: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.event.repository.name }}-${{ matrix.service }}
           tags: |
-            type=raw,value=dev-${{ shortsha }},enable=${{ github.ref_name == 'dev' }}
+            # For development-
+            type=sha,prefix=dev-,format=short,enable=${{ github.ref_name == 'dev' }}
+            # For production:
             type=raw,value=latest,enable=${{ github.ref_name == 'main' }}
             type=semver,pattern={{version}},value=${{ needs.prepare.outputs.version }},enable=${{ github.ref_name == 'main' }}
             type=semver,pattern={{major}}.{{minor}},value=${{ needs.prepare.outputs.version }},enable=${{ github.ref_name == 'main' }}
