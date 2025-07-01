@@ -54,18 +54,22 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      
+      # It's best practice to include QEMU for multi-platform builds
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        
       - uses: docker/setup-buildx-action@v3
       - uses: docker/metadata-action@v5
         id: meta
         with:
           images: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.event.repository.name }}-${{ matrix.service }}
           tags: |
-            # For development-
             type=sha,prefix=dev-,format=short,enable=${{ github.ref_name == 'dev' }}
-            # For production:
             type=raw,value=latest,enable=${{ github.ref_name == 'main' }}
             type=semver,pattern={{version}},value=${{ needs.prepare.outputs.version }},enable=${{ github.ref_name == 'main' }}
             type=semver,pattern={{major}}.{{minor}},value=${{ needs.prepare.outputs.version }},enable=${{ github.ref_name == 'main' }}
+            
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
@@ -79,6 +83,10 @@ jobs:
             ${{ matrix.service == 'frontend' && format('VITE_CLERK_PUBLISHABLE_KEY={0}', secrets.VITE_CLERK_PUBLISHABLE_KEY) || '' }}
             ${{ matrix.service == 'frontend' && format('VITE_BACKEND1_BASE_URL={0}', vars.VITE_BACKEND1_BASE_URL) || '' }}
             ${{ matrix.service == 'frontend' && format('VITE_BACKEND2_BASE_URL={0}', vars.VITE_BACKEND2_BASE_URL) || '' }}
+          # Load cache from previous runs
+          cache-from: type=gha
+          # Export cache for future runs
+          cache-to: type=gha,mode=max
 
   release:
     name: Create GitHub Release
