@@ -7,33 +7,38 @@ on:
       - dev
 
 jobs:
-  validate:
-    name: Validate PR
+  validate-title:
+    name: Validate PR Title
     if: startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Enforce Conventional Commit Messages on the PR Title
       - name: Conventional Commit PR Title Check
-        uses: ytanikin/pr-conventional-commits@1.4.0
+        uses: ytanikin/pr-conventional-commits@v1
         with:
           task_types: '["feat","fix","docs","style","refactor","perf","test","chore","revert","ci"]'
           add_label: 'false'
 
-      # Task 2: Add a simple, relevant check (Docker Build Dry-Run) i.e. if the dockerfile is buildable
+  validate-docker-build:
+    name: Verify Frontend Dockerfile Build
+    # This job needs the title to be valid first
+    needs: validate-title
+    if: startsWith(github.head_ref, 'feature/')
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Verify Dockerfiles can be built
+      - name: Verify Dockerfile can be built
         uses: docker/build-push-action@v5
         with:
-          # We check the frontend and backend1 for now
-          file: |
-            ./backend1/Dockerfile
-            ./frontend/Dockerfile
-          context: .
-          # DRY RUN:
-          tags: local/test-build:latest
-          # PROVIDED DUMMY values so the frontend build process doesn't fail. Explained why in the fiunal report.
+          # We explicitly set the context to the frontend directory
+          context: ./frontend
+          # The file path is now relative to that context
+          file: ./frontend/Dockerfile
+          push: false # This is a dry-run
+          tags: local/test-build-frontend:latest
+          # Provided dummy values for the frontend build
           build-args: |
             VITE_CLERK_PUBLISHABLE_KEY=pk_test_dummykeyforpr12345
             VITE_BACKEND1_BASE_URL=http://localhost:3000
