@@ -10,3 +10,5 @@ feat!: launch version 1.0.0 after deleting tags
 Successfully updated to v1.0.1
 
 5. Now expecting major release v2.0.0
+
+6. Expecting v2.1.1 after feat: add new reporting feature
