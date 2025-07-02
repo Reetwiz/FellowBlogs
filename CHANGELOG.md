@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/Reetwiz/FellowBlogs/compare/v1.0.0...v1.0.1) (2025-07-02)
+
+
+### Bug Fixes
+
+* update log for patch to v1.0.0 ([475fd12](https://github.com/Reetwiz/FellowBlogs/commit/475fd12e6ef8bd8181f096eef8742e71069ce934))
+
 ## [1.0.0](https://github.com/Reetwiz/FellowBlogs/compare/v0.2.0...v1.0.0) (2025-07-02)
 
 
