@@ -7,3 +7,6 @@
 feat!: launch version 1.0.0 after deleting tags
 
 4. Expected v1.0.1 after fix:
+Successfully updated to v1.0.1
+
+5. Now expecting major release v2.0.0
