@@ -4,5 +4,5 @@
 ~~PATCH increment from 1.0.0 via fix:~~
 
 3. Perform feat commit for first major release
-feat!: launch version 1.0.0
+feat!: launch version 1.0.0 after deleting tags
 
