@@ -1,3 +1,10 @@
+## [2.1.0](https://github.com/Reetwiz/FellowBlogs/compare/v2.0.0...v2.1.0) (2025-07-02)
+
+
+### Features
+
+* add new reporting feature ([3a5b98a](https://github.com/Reetwiz/FellowBlogs/commit/3a5b98a4273c4bc8447b1eeeb740aef0188e6fea))
+
 ## [2.0.0](https://github.com/Reetwiz/FellowBlogs/compare/v1.0.1...v2.0.0) (2025-07-02)
 
 
@@ -34,11 +41,4 @@
 ### Features
 
 * 3rd Update Log.md ([3817a5f](https://github.com/Reetwiz/FellowBlogs/commit/3817a5fce53411df55f287bde09722d5a1266daf))
-
-## [0.1.0](https://github.com/Reetwiz/FellowBlogs/compare/ccedd26b54abcf3772160683277c3349e9f46259...v0.1.0) (2025-07-01)
-
-
-### Features
-
-* Update Log.md for patch increment ([ccedd26](https://github.com/Reetwiz/FellowBlogs/commit/ccedd26b54abcf3772160683277c3349e9f46259))
 
