@@ -1,4 +1,4 @@
-name: PR Title Check
+name: PR Checks
 
 on:
   pull_request:
@@ -8,12 +8,33 @@ on:
 
 jobs:
   validate:
-    name: Validate PR Title
+    name: Validate PR
     if: startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Enforce Conventional Commit Messages on the PR Title
       - name: Conventional Commit PR Title Check
         uses: ytanikin/pr-conventional-commits@v1.4.0
         with:
           task_types: '["feat","fix","docs","style","refactor","perf","test","chore","revert","ci"]'
           add_label: 'false'
+
+      # Task 2: Add a simple, relevant check (Docker Build Dry-Run) i.e. if the dockerfile is buildable
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Verify Dockerfiles can be built
+        uses: docker/build-push-action@v5
+        with:
+          # We check the frontend and backend1 for now
+          file: |
+            ./backend1/Dockerfile
+            ./frontend/Dockerfile
+          context: .
+          # DRY RUN:
+          tags: local/test-build:latest
+          # PROVIDED DUMMY values so the frontend build process doesn't fail. Explained why in the fiunal report.
+          build-args: |
+            VITE_CLERK_PUBLISHABLE_KEY=pk_test_dummykeyforpr12345
+            VITE_BACKEND1_BASE_URL=http://localhost:3000
+            VITE_BACKEND2_BASE_URL=http://localhost:3001
