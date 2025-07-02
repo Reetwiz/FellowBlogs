@@ -6,3 +6,4 @@
 3. Perform feat commit for first major release
 feat!: launch version 1.0.0 after deleting tags
 
+4. Expected v1.0.1 after fix:
