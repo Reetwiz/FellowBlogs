@@ -1,3 +1,14 @@
+## [2.0.0](https://github.com/Reetwiz/FellowBlogs/compare/v1.0.1...v2.0.0) (2025-07-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* overhaul system v2.0.0
+
+### Features
+
+* overhaul system v2.0.0 ([d10f5ab](https://github.com/Reetwiz/FellowBlogs/commit/d10f5ab50160b299092077423e3c397661cf4c75))
+
 ## [1.0.1](https://github.com/Reetwiz/FellowBlogs/compare/v1.0.0...v1.0.1) (2025-07-02)
 
 
