@@ -1,4 +1,10 @@
-# FellowBlogs
+
+Link to complete CICD: 
+https://github.com/Reetwiz/fellowblogcicd 
+
+> This repo is for CI
+
+# FellowBlogs0
 
 
 ### The branching strategy
